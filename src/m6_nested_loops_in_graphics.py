@@ -3,8 +3,8 @@ This project demonstrates NESTED LOOPS (i.e., loops within loops)
 in the context of TWO-DIMENSIONAL GRAPHICS.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Garrett Jacobs.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -80,10 +80,36 @@ def draw_L(window, circle, r, c):
     and m and n are small, positive integers.
     """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
 
+    original_x = circle.center.x
+    original_y = circle.center.y
+    radius = circle.radius
+    x = original_x
+    y = original_y
+    for k in range(r):
+        for j in range(3):
+            new_circle = rg.Circle(rg.Point(x, y),radius)
+            new_circle.fill_color = circle.fill_color
+            new_circle.attach_to(window)
+            window.render(0.1)
+            x = x + (2 * circle.radius)
+        y = y + 2 * radius
+        x = original_x
+
+    original_x = circle.center.x
+    x = original_x
+    for k in range(3):
+        for j in range(c+3):
+            new_circle = rg.Circle(rg.Point(x,y),radius)
+            new_circle.fill_color = circle.fill_color
+            new_circle.attach_to(window)
+            window.render(0.1)
+            x = x + (2 * circle.radius)
+        y = y + 2 * radius
+        x = original_x
 
 def run_test_draw_wall_on_right():
     """ Tests the    draw_wall_on_right    function. """
@@ -124,6 +150,32 @@ def draw_wall_on_right(rectangle, n, window):
     # TODO: 3. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
+
+
+    original_x = rectangle.corner_1.x
+    original_y = rectangle.corner_1.y
+    original_x2 = rectangle.corner_2.x
+    original_y2 = rectangle.corner_2.y
+    x = original_x
+    y = original_y
+    x2 = original_x2
+    y2 = original_y2
+
+    change_x = x2 - x
+    change_y = y2 - y
+    for k in range(n):
+        for j in range(k+1):
+            new_rectanglecorner1 = rg.Point(x,y)
+            new_rectanglecorner2 = rg.Point(x2,y2)
+            new_rectangle = rg.Rectangle(new_rectanglecorner1,new_rectanglecorner2)
+            new_rectangle.attach_to(window)
+            window.render(0.1)
+            x = x - change_x
+            x2 = x2 - change_x
+        y2 = y2 + change_y
+        y = y + change_y
+        x= original_x
+        x2 = original_x2
 
 
 # ----------------------------------------------------------------------
